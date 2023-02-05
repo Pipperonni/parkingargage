@@ -20,30 +20,35 @@ class ParkingGargage():
     def ticket_tracking(self):
         user_ticket = tickets.pop()
         print(f"Your ticket #{str(user_ticket)} in space #{user_ticket}")
-        users_choice = input("Would you like to pay now? (y/n): ")
-        if users_choice == "y":
-            current_ticket[f"{user_ticket}"] = True
-            print(current_ticket)
-            prep = Paid(pre_paid="", pay_later="")
-            prep.pre_pay()
-        elif users_choice == "n":
-            current_ticket[f"{user_ticket}"] = False
-            return          
+        while True:    
+            users_choice = input("Would you like to pay now? (y/n): ")
+            if users_choice == "y":
+                current_ticket[f"{user_ticket}"] = True
+                print(current_ticket)
+                prep = Paid(pre_paid="", pay_later="")
+                prep.pre_pay()
+            elif users_choice == "n":
+                current_ticket[f"{user_ticket}"] = False
+                return
+            else:
+                print("Invald Input")
+                continue        
     
     def leaving(self):
         while True:    
             user_show_ticket = input("What is your ticket number?: ")
-            if current_ticket[user_show_ticket] == True:    
+            if user_show_ticket != "y" or "n":
+                print("Invald Input")
+                continue
+            elif current_ticket[user_show_ticket] == True:    
                 print("Have a nice day.")
                 tickets.append(user_show_ticket)
                 spaces.append(user_show_ticket)
-                return
+                return False
             elif current_ticket[user_show_ticket] == False:
                 prep2 = Paid(pre_paid="", pay_later="")
                 prep2.later_pay()
-            else:
-                print("Invald Input")
-                continue
+
 
     def run(self):
         while True:
@@ -53,7 +58,7 @@ class ParkingGargage():
             elif user_choice == "n":
                 self.leaving()
             elif user_choice == "quit":
-                break
+                return False
             else:
                 print("Invald Input")
                 continue
