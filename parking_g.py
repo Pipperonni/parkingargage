@@ -7,7 +7,7 @@ spaces = [num for num in range(1,3)]
 class ParkingGargage():
 
     def __init__(self):
-        self.current_ticket = []
+        self.current_ticket = {}
         
     
     def space_change(self):
