@@ -1,6 +1,6 @@
 
-tickets = [num for num in range(1,3)]
-spaces = [num for num in range(1,3)]
+tickets = [num for num in range(1,11)]
+spaces = [num for num in range(1,11)]
 current_ticket = {}
 
 
