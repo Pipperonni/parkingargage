@@ -21,10 +21,9 @@ class ParkingGargage():
         user_ticket = tickets.pop()
         print(f"Your ticket #{str(user_ticket)} in space #{user_ticket}")
         while True:    
-            users_choice = input("Would you like to pay now? (y/n): ")
+            users_choice = input("Would you like to pay now? (y/n): ").lower()
             if users_choice == "y":
                 current_ticket[f"{user_ticket}"] = True
-                print(current_ticket)
                 prep = Paid(pre_paid="", pay_later="")
                 prep.pre_pay()
             elif users_choice == "n":
@@ -36,7 +35,7 @@ class ParkingGargage():
     
     def leaving(self):
         while True:    
-            user_show_ticket = input("What is your ticket number?: ")
+            user_show_ticket = input("What is your ticket number?: ").lower()
             if current_ticket[user_show_ticket] == True:    
                 print("Have a nice day.")
                 tickets.append(user_show_ticket)
@@ -60,7 +59,7 @@ class ParkingGargage():
 
     def run(self):
         while True:
-            user_choice = input("Are you parking: (y/n) or quit: ")                
+            user_choice = input("Are you parking: (y/n) or quit: ").lower()                
             if user_choice == "y":
                 self.space_parking()
             elif user_choice == "n":
@@ -83,7 +82,7 @@ class Paid():
 
     def pre_pay(self):
         while True:
-            user_choice = input("Please pay $5.00: (y/n): ")
+            user_choice = input("Please pay $5.00: (y/n): ").lower()
             if user_choice == "y":
                 print("Ticket has been paid, you have 15min to leave.")
                 back_to_run = ParkingGargage()
@@ -96,7 +95,7 @@ class Paid():
 
     def later_pay(self):
         while True:
-            user_choice = input("Please pay $5.00: (y/n): ")
+            user_choice = input("Please pay $5.00: (y/n): ").lower()
             if user_choice == "y":
                 print("Have a nice day.")
                 back_to_run = ParkingGargage()
