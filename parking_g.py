@@ -7,7 +7,7 @@ current_ticket = {}
 class ParkingGargage():
 
     def __init__(self):
-        self.ticket_test = {}
+        self.ticket_holder = []
         
     
     def space_parking(self):
@@ -24,10 +24,20 @@ class ParkingGargage():
             users_choice = input("Would you like to pay now? (y/n): ").lower()
             if users_choice == "y":
                 current_ticket[f"{user_ticket}"] = True
-                prep = Paid(pre_paid="", pay_later="")
+                ticket = user_ticket
+                space = user_ticket
+                pre_paid = "y"
+                prep = Paid(ticket, space, pre_paid)
+                self.ticket_holder.append(prep)
                 prep.pre_pay()
+                return
             elif users_choice == "n":
                 current_ticket[f"{user_ticket}"] = False
+                ticket = user_ticket
+                space = user_ticket
+                pre_paid = "n"
+                prep = Paid(ticket, space, pre_paid)
+                self.ticket_holder.append(prep)
                 return
             else:
                 print("Invald Input")
@@ -41,13 +51,14 @@ class ParkingGargage():
                 tickets.append(user_show_ticket)
                 spaces.append(user_show_ticket)
                 del current_ticket[user_show_ticket]
-                return False
+                return
             elif current_ticket[user_show_ticket] == False:
                 del current_ticket[user_show_ticket]
                 tickets.append(user_show_ticket)
                 spaces.append(user_show_ticket)
-                prep2 = Paid(pre_paid="", pay_later="")
-                return prep2.later_pay()
+                prep2 = Paid(ticket="", space="",pre_paid="")
+                prep2.later_pay()
+                return
             else:
                 for ticket in current_ticket.keys():
                     if ticket != int(user_show_ticket):
@@ -55,7 +66,6 @@ class ParkingGargage():
                         continue
                     else:
                         break
-
 
     def run(self):
         while True:
@@ -68,7 +78,7 @@ class ParkingGargage():
                 else:
                     self.leaving()
             elif user_choice == "quit":
-                return False
+                break
             else:
                 print("Invald Input")
                 continue
@@ -76,9 +86,10 @@ class ParkingGargage():
     
 class Paid():
 
-    def __init__(self, pre_paid, pay_later):
+    def __init__(self, ticket, space, pre_paid):
+        self.ticket = ticket
+        self.space = space
         self.pre_paid = pre_paid 
-        self.pay_later = pay_later
 
     def pre_pay(self):
         while True:
@@ -87,6 +98,7 @@ class Paid():
                 print("Ticket has been paid, you have 15min to leave.")
                 back_to_run = ParkingGargage()
                 back_to_run.run()
+                return
             elif user_choice == "n":
                 continue
             else:
@@ -100,6 +112,7 @@ class Paid():
                 print("Have a nice day.")
                 back_to_run = ParkingGargage()
                 back_to_run.run()
+                return
             elif user_choice == "n":
                 continue
             else:
@@ -107,5 +120,6 @@ class Paid():
                 continue
 
 new_customer = ParkingGargage()
-new_customer.run() 
+new_customer.run()
+
     
