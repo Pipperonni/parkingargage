@@ -1,8 +1,8 @@
 
+
 tickets = [1,2,3,4,5,6,7,8,9,10,11]
 spaces = [1,2,3,4,5,6,7,8,9,10,11]
 current_ticket = {}
-
 
 class ParkingGargage():
 
@@ -26,7 +26,7 @@ class ParkingGargage():
                 current_ticket[f"{user_ticket}"] = True
                 ticket = user_ticket
                 space = user_ticket
-                pre_paid = "y"
+                pre_paid = "yes"
                 prep = Paid(ticket, space, pre_paid)
                 self.ticket_holder.append(prep)
                 prep.pre_pay()
@@ -35,7 +35,7 @@ class ParkingGargage():
                 current_ticket[f"{user_ticket}"] = False
                 ticket = user_ticket
                 space = user_ticket
-                pre_paid = "n"
+                pre_paid = "no"
                 prep = Paid(ticket, space, pre_paid)
                 self.ticket_holder.append(prep)
                 return
@@ -56,7 +56,7 @@ class ParkingGargage():
                 del current_ticket[user_show_ticket]
                 tickets.append(user_show_ticket)
                 spaces.append(user_show_ticket)
-                prep2 = Paid(ticket="", space="",pre_paid="")
+                prep2 = Paid(ticket="", space="", pre_paid="")
                 prep2.later_pay()
                 return
             else:
@@ -81,8 +81,8 @@ class ParkingGargage():
                 break
             else:
                 print("Invald Input")
-                continue
-            
+                self.run()
+                return
     
 class Paid():
 
